@@ -26,11 +26,6 @@ class UnifiedGroup(object):
         self.first_word = new_word
         UnifiedGroup.latest_group_id+=1
 
-    def add_lemmas(self, lemmas):
-        for lemma in lemmas:
-            if lemma.lower() not in self.lemmas:
-                self.lemmas.append(lemma.lower())
-
     def add_word(self, new_word_text):
         new_word = Word(new_word_text.lower())
         self.words.append(new_word)

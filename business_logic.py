@@ -47,38 +47,23 @@ class BusinessLogic(object):
                 # and per task instructions - it supposed to handle only nouns)
                 if len(lemmas) > 0:
 
-                    group_that_contains_lemma = None
-                    for lemma in lemmas:
-                        if lemma in BusinessLogic.word_to_group:
-                            group_that_contains_lemma = BusinessLogic.word_to_group[lemma]
+                    # Create a new unified group of all the synnonims of all the synsets of the word
+                    new_group = UnifiedGroup(word, lemmas)
 
-                    if group_that_contains_lemma is not None:
-                        group_that_contains_lemma.add_lemmas(lemmas)
-                        for lemma in lemmas:
-                            BusinessLogic.word_to_group[lemma] = group_that_contains_lemma
-
-                        group_that_contains_lemma.add_word(word)
-
-
+                    # If this is the first group
+                    if len(BusinessLogic.sorted_groups) == 0:
+                        BusinessLogic.sorted_groups = [new_group]
                     else:
+                        BusinessLogic.sorted_groups = [new_group] + BusinessLogic.sorted_groups
 
-                        # Create a new unified group of all the synnonims of all the synsets of the word
-                        new_group = UnifiedGroup(word, lemmas)
+                    # Add every word in the new unified group to the word to group dictionary
+                    # So that every word points to the new group
+                    for word in lemmas:
+                        try:
 
-                        # If this is the first group
-                        if len(BusinessLogic.sorted_groups) == 0:
-                            BusinessLogic.sorted_groups = [new_group]
-                        else:
-                            BusinessLogic.sorted_groups = [new_group] + BusinessLogic.sorted_groups
-
-                        # Add every word in the new unified group to the word to group dictionary
-                        # So that every word points to the new group
-                        for word in lemmas:
-                            try:
-
-                                BusinessLogic.word_to_group[word] = new_group
-                            except Exception as err:
-                                print "Exception when setting new word to group: %s" % err
+                            BusinessLogic.word_to_group[word] = new_group
+                        except Exception as err:
+                            print "Exception when setting new word to group: %s" % err
                 else:
 
                     # Probably it is not a noun

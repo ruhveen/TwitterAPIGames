@@ -5,10 +5,10 @@ from tweepy import OAuthHandler
 from tweepy import Stream
 
 # Variables that contains the user credentials to access Twitter API
-ACCESS_TOKEN = "886322503-5Tvqb0AI9cDIK3x5DurcNQW6k0JxQgRri0X6E1NK"
-ACCESS_TOKEN_SECRET = "I8Ef3RGHlYFF0SknrZt35CPpV2ZanloDvBisoXRwKdMsV"
-CONSUMER_KEY = "vW7k7yqmLcMmqdpdR0Peq0XfD"
-CONSUMER_SECRET = "Q3vke6FCFabv8k7eUaSThtqzM2KYZPCjVIiloRxxBOwpcGhN7j"
+ACCESS_TOKEN = ""
+ACCESS_TOKEN_SECRET = ""
+CONSUMER_KEY = ""
+CONSUMER_SECRET = ""
 
 def get_user_input(parameter_name, default_value):
     user_input = raw_input("Please enter %s or press enter to use default value (%s)" %
